@@ -6,6 +6,6 @@ type
     path*: seq[string]
 type
   Function*[L, X] = object
-    X*: proc(a: L): X {.noSideEffect.}
+    X*: proc(a: L): X
     energy_cost*: float
     name*: string
