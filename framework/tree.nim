@@ -4,10 +4,19 @@ import ../imogen_sugar/syntax
 import sequtils
 
 proc skew(a: seq[float], i: int): seq[float] =
-  const skew_amt = 0.1
+  const skew_amt = 0.2
   let sub_amt = skew_amt / (a.len - 1).float
   for ii, e in a.pairs:
-      result.add if i == ii: e - sub_amt else: e + skew_amt
+    let e_adjusted =
+      if i == ii:
+        e - sub_amt
+      else:
+        e + skew_amt
+
+    if e_adjusted > 1.0:
+      return a
+    else:
+      result.add(e_adjusted)
 
 proc litsXfxns*[L, E](lits: seq[Literal[L]], fxns: openarray[Function[L, E]]): seq[Literal[E]] =
   for i, fxn in fxns.pairs:
@@ -60,6 +69,7 @@ proc testTreeToDepth*[T](lits: seq[Literal[T]],
                         fxns: seq[Function[T, T]],
                         depth: int,
                         withMerge: bool = true): seq[Literal[T]] =
+  >@\ lits
   if depth == 0:
     return lits
   else:
