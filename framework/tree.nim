@@ -1,5 +1,5 @@
-import ../imogen_sugar/type_sugar
-import ../imogen_sugar/method_sugar
+import ../imogen_sugar/type
+import ../imogen_sugar/syntax
 
 import sequtils
 

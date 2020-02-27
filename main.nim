@@ -1,11 +1,8 @@
-import imogen_sugar/print_sugar
-import imogen_sugar/method_sugar
-import imogen_sugar/type_sugar
+import imogen_sugar/syntax
+import imogen_sugar/type
 
-import imogen_nodes/functions
-import imogen_nodes/literals
-
-import imogen_tree/layer_calculate
+import framework/atoms
+import framework/tree
 
 import math
 
