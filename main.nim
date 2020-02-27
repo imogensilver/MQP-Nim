@@ -5,6 +5,7 @@ import framework/atoms
 import framework/tree
 
 import math
+import sequtils
 
 const
   depth = 20
