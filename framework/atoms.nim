@@ -1,4 +1,6 @@
-import ../imogen_sugar/type
+import types
+
+import sequtils
 
 ### FUNCTIONS
 ## TRIGGERS
@@ -16,14 +18,3 @@ template newFunction*[L, R](fxn: untyped, energy_cost: float): Function[L, R] =
 ## CONSTRUCTOR
 proc newLiteral*[T](X: T, energy: float, preference_table: seq[float], path: string): Literal[T] =
   Literal[T](X: X, energy: energy, preference_table: preference_table, path: @[path])
-
-## UNIFORM DISTRIBUTION GENERATOR FOR INITIAL PREFERENCE TABLES
-proc genUniformDist*(a: int): seq[float] =
-  let bin: float = 1.0 / a.float
-  for _ in 1..a:
-    result.add(bin)
-
-## PROBLEM SET GENERATOR FROM X AND FUNCTION CREATES X AND Y PAIRINGS
-proc genProblemSet*[X, Y](x: seq[X], relation: proc(a: X): Y): seq[(X, Y)] =
-  for instance in x:
-    result.add((instance, instance.relation))
