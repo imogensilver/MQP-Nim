@@ -46,21 +46,11 @@ proc detectAndMerge[T](lits: seq[Literal[T]]): seq[Literal[T]] =
   let energy_portion: float = energy_pool / result.len.float
   result.apply(proc(a: var Literal[T]) = a.energy += energy_portion)
 
-# proc detectAndMerge[T](lits: seq[Literal[T]]): seq[Literal[T]] {.deprecated.} =
-#   var mlits = lits
-#   for i, lit1 in mlits.menergized_pairs:
-#     for lit2 in mlits >.. i:
-#       if(literalEquality(lit1, lit2)):
-#         lit1.energy += lit2.energy
-#         lit2.energy = -1
-#     result.add(lit1)
-
 proc testTreeToDepth*[T](lits: seq[Literal[T]],
                         fxns: seq[Function[T, T]],
                         depth: int,
                         withMerge: bool = true,
                         successPredicate: proc(a: Literal[T]): bool): seq[Literal[T]]  =
-  # >@\ lits
   var successes = lits.filter(successPredicate)
   if successes.len != 0 or depth == 0:
     return successes
@@ -74,7 +64,6 @@ proc testTreeToDepth*[T](lits: seq[Literal[T]],
                         fxns: seq[Function[T, T]],
                         depth: int,
                         withMerge: bool = true): seq[Literal[T]] {.deprecated.} =
-  # >@\ lits
   if depth == 0:
     return lits
   else:
