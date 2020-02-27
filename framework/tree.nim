@@ -3,6 +3,12 @@ import ../imogen_sugar/syntax
 
 import sequtils
 
+proc skew(a: seq[float], i: int): seq[float] =
+  const skew_amt = 0.1
+  let sub_amt = skew_amt / (a.len - 1).float
+  for ii, e in a.pairs:
+      result.add if i == ii: e - sub_amt else: e + skew_amt
+
 proc litsXfxns*[L, E](lits: seq[Literal[L]], fxns: openarray[Function[L, E]]): seq[Literal[E]] =
   for i, fxn in fxns.pairs:
     for lit in lits.filter(
@@ -10,7 +16,7 @@ proc litsXfxns*[L, E](lits: seq[Literal[L]], fxns: openarray[Function[L, E]]): s
         lit.energy * lit.preference_table[i] > fxn.energy_cost):
       result.add(Literal[E](X: fxn.X(lit.X),
                             energy: lit.energy * lit.preference_table[i],
-                            preference_table: lit.preference_table,
+                            preference_table: lit.preference_table.skew(i),
                             path: lit.path & fxn.name))
 
 iterator energized_pairs[T](a: var seq[Literal[T]]): (int, var Literal[T]) =
