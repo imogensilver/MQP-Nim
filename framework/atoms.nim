@@ -1,7 +1,5 @@
 import types
 
-import sequtils
-
 ### FUNCTIONS
 ## TRIGGERS
 proc DEC*(a: int): int =
