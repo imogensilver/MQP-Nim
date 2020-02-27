@@ -9,14 +9,14 @@ template `>>>`*(a: untyped): untyped =
   echo a
 template `>>\`*(a: untyped): untyped =
   >>> a
-  echo "\n"
+  echo ""
 
 template `>@>`*[T](a: seq[T]): untyped =
   for x in a:
     echo x
 template `>@\`*[T](a: seq[T]): untyped =
   >@> a
-  echo "\n"
+  echo ""
 
 ### METHOD EQUALS CRUNCH
 template `.=`*[T](a: var T, b: proc(a: T): T): untyped =
