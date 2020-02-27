@@ -11,9 +11,9 @@ proc skew(a: seq[float], i: int): seq[float] =
   for ii, e in a.pairs:
     let e_adjusted =
       if i == ii:
-        e - sub_amt
-      else:
         e + skew_amt
+      else:
+        e - sub_amt
 
     if e_adjusted > 1.0:
       return a
@@ -60,7 +60,7 @@ proc testTreeToDepth*[T](lits: seq[Literal[T]],
                         depth: int,
                         withMerge: bool = true,
                         successPredicate: proc(a: Literal[T]): bool): seq[Literal[T]]  =
-  >@\ lits
+  # >@\ lits
   var successes = lits.filter(successPredicate)
   if successes.len != 0 or depth == 0:
     return successes
@@ -74,7 +74,7 @@ proc testTreeToDepth*[T](lits: seq[Literal[T]],
                         fxns: seq[Function[T, T]],
                         depth: int,
                         withMerge: bool = true): seq[Literal[T]] {.deprecated.} =
-  >@\ lits
+  # >@\ lits
   if depth == 0:
     return lits
   else:
