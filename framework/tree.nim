@@ -1,10 +1,12 @@
-import ../imogen_sugar/type
 import ../imogen_sugar/syntax
 
+import types
+
 import sequtils
+import algorithm
 
 proc skew(a: seq[float], i: int): seq[float] =
-  const skew_amt = 0.2
+  const skew_amt = 0.1
   let sub_amt = skew_amt / (a.len - 1).float
   for ii, e in a.pairs:
     let e_adjusted =
@@ -28,34 +30,37 @@ proc litsXfxns*[L, E](lits: seq[Literal[L]], fxns: openarray[Function[L, E]]): s
                             preference_table: lit.preference_table.skew(i),
                             path: lit.path & fxn.name))
 
-iterator energized_pairs[T](a: var seq[Literal[T]]): (int, var Literal[T]) =
-  for index, item in a.mpairs:
-    if(item.energy != -1):
-      yield (index, item)
-
-iterator diag_from[T](a: var seq[Literal[T]], b: int): var Literal[T] =
-  var i = b + 1
-  while i < a.len:
-    yield a[i]
-    i.inc
-
 proc literalEquality*[A](a,b: Literal[A]): bool =
   a.X == b.X
 
-proc detectAndMerge*[T](lits: seq[Literal[T]]): seq[Literal[T]] =
+proc detectAndMerge[T](lits: seq[Literal[T]]): seq[Literal[T]] =
   var mlits = lits
+  mlits.sort(proc(a, b: Literal[T]): int = cmp(a.energy, b.energy), Descending)
+  var energy_pool: float = 0.float
   for i, lit1 in mlits.energized_pairs:
-    for lit2 in mlits.diag_from(i): #maybe for lit2 in mlits[i..^0]
+    for lit2 in mlits >.. i:
       if(literalEquality(lit1, lit2)):
-        lit1.energy += lit2.energy
+        energy_pool += lit2.energy;
         lit2.energy = -1
     result.add(lit1)
+  let energy_portion: float = energy_pool / result.len.float
+  result.apply(proc(a: var Literal[T]) = a.energy += energy_portion)
+
+# proc detectAndMerge[T](lits: seq[Literal[T]]): seq[Literal[T]] {.deprecated.} =
+#   var mlits = lits
+#   for i, lit1 in mlits.menergized_pairs:
+#     for lit2 in mlits >.. i:
+#       if(literalEquality(lit1, lit2)):
+#         lit1.energy += lit2.energy
+#         lit2.energy = -1
+#     result.add(lit1)
 
 proc testTreeToDepth*[T](lits: seq[Literal[T]],
                         fxns: seq[Function[T, T]],
                         depth: int,
                         withMerge: bool = true,
                         successPredicate: proc(a: Literal[T]): bool): seq[Literal[T]]  =
+  >@\ lits
   var successes = lits.filter(successPredicate)
   if successes.len != 0 or depth == 0:
     return successes
@@ -68,7 +73,7 @@ proc testTreeToDepth*[T](lits: seq[Literal[T]],
 proc testTreeToDepth*[T](lits: seq[Literal[T]],
                         fxns: seq[Function[T, T]],
                         depth: int,
-                        withMerge: bool = true): seq[Literal[T]] =
+                        withMerge: bool = true): seq[Literal[T]] {.deprecated.} =
   >@\ lits
   if depth == 0:
     return lits
