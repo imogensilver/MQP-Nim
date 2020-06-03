@@ -25,7 +25,4 @@ In this restrictive language there are only the atomic functions INC and DEC, th
 * X: whatever the current X is.
 * energy: the energy alloted to the branch (used as a polynomial-time bounding device for pruning exhausted branches)
 * preference_table: each branch keeps a preference of wha atom to use next [DEC, INC], based on its past experiences and success.
-
-and finally:
-
 * path: the program created by the universal solver. That is the point-free string of combinators which calculate y from x.
