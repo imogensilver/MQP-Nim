@@ -1,5 +1,7 @@
-# The Nim Framework for Imogen Silver's Major Qualifying Project
-This project implements a version of Jeurgen Schmidhuber's Optimal Ordered Problem Solver (OOPS) in a lisp-like, point-free language. The framework is written in [Nim](https://nim-lang.org), because it allows for large amounts of meta-programming and still compiles to C. It is expressive, elegant, and extremely powerful.
+# The Nim Framework for Rose Silver's Major Qualifying Project
+This project implements a version of Jeurgen Schmidhuber's Optimal Ordered Problem Solver [(OOPS)](http://people.idsia.ch/~juergen/oops.html) in a lisp-like, point-free language. The framework is written in [Nim](https://nim-lang.org), because it allows for large amounts of meta-programming and still compiles to C. It is expressive, elegant, and extremely powerful.
+
+This repository contains the source code for a universal solver. That is, a program which searches the entirety of valid program space to solve an input problem. Given enough time, this program can solve any computable problem. In fact the time taken is guaranteed to be polynomial with respect to the input problem, and exponential with respect to the solution's length.
 
 
-Imogen Silver
+Rose Silver
