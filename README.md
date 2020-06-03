@@ -3,5 +3,4 @@ This project implements a version of Jeurgen Schmidhuber's Optimal Ordered Probl
 
 This repository contains the source code for a universal solver. That is, a program which searches the entirety of valid program space to solve an input problem. Given enough time, this program can solve any computable problem. In fact the time taken is guaranteed to be polynomial with respect to the input problem, and exponential with respect to the solution's length.
 
-
-Rose Silver
+This code is pre-setup to perform energy-based breadth-first searches on program space to solve y = x^2 for x in 0..10. The program punishes searching similar branches, that is ones whose answers closely mimic another branches, by merging energy and computational time when the same output is received by two separate programs.
