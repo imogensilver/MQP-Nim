@@ -22,7 +22,7 @@ Sample lines from output:
 @[(X: 9, energy: 312067.2026819047, preference_table: @[2.775557561562891e-17, 0.9999999999999999], path: @["X[3]", "INC", "INC", "INC", "INC", "INC", "INC"])]
 ```
 In this restrictive language there are only the atomic functions INC and DEC, though theory tells us that those are the only functions required for full computability. The output shows first the problem instance pair (x, y) and then the machine's output:
-* X: whatever the current X is.
+* X: paradoxically, this stands for Y. This is a hold over from conflicting syntaxes of various theorists
 * energy: the energy alloted to the branch (used as a polynomial-time bounding device for pruning exhausted branches)
 * preference_table: each branch keeps a preference of what atom to use next [DEC, INC], based on its past experiences and success.
 * path: the program created by the universal solver. That is the point-free string of combinators which calculate y from x.
