@@ -24,5 +24,5 @@ Sample lines from output:
 In this restrictive language there are only the atomic functions INC and DEC, though theory tells us that those are the only functions required for full computability. The output shows first the problem instance pair (x, y) and then the machine's output:
 * X: whatever the current X is.
 * energy: the energy alloted to the branch (used as a polynomial-time bounding device for pruning exhausted branches)
-* preference_table: each branch keeps a preference of wha atom to use next [DEC, INC], based on its past experiences and success.
+* preference_table: each branch keeps a preference of what atom to use next [DEC, INC], based on its past experiences and success.
 * path: the program created by the universal solver. That is the point-free string of combinators which calculate y from x.
